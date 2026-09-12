@@ -1,264 +1,582 @@
-<!doctype html>
-<html lang="en"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260911-05-06910f9","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script><script src="/_sdk/c21197326e9a1154.telemetry_sdk.js" integrity="sha512-Aqwl+NmLtKBcMQM4HY+W9lmBHa+zP5MqSEuYfCjkzt4xeOSv2xNz81cCp7JyXBVrY+zojg5o94FHY/R31v2d3Q=="></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C# Without Complications</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <title>C# Without Complications | MM CodeLab</title>
+  <meta
+    name="description"
+    content="Learn C# programming step by step with a simple and practical approach."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
     :root {
-      --ink: #000099;
-      --pink: #FF66CC;
+      --blue: #000099;
+      --pink: #ff66cc;
       --page: #f7f7f4;
       --muted: #393979;
-      --rule: rgba(0, 0, 153, 0.16);
+      --white: #ffffff;
+      --rule: rgba(0, 0, 153, 0.14);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html,
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      width: 100%;
-      min-width: 320px;
       margin: 0;
-    }
-
-    body {
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      min-width: 320px;
+      background: var(--page);
+      color: var(--blue);
       font-family: "DM Sans", sans-serif;
-      color: var(--ink);
     }
 
-    .landing-shell {
-      width: 100%;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+    .page {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
 
-    .site-header {
-      width: 100%;
-      padding: clamp(1.5rem, 3.2vw, 2.8rem) clamp(1.5rem, 6vw, 7rem);
+    /* Header */
+
+    header {
+      padding: 28px clamp(24px, 6vw, 96px);
       border-bottom: 1px solid var(--rule);
     }
 
-    .logo-image {
-      display: block;
-      width: clamp(8.25rem, 12vw, 10.5rem);
-      height: auto;
-      object-fit: contain;
-    }
-
-    .hero-layout {
-      width: 100%;
+    .header-inner {
       max-width: 1440px;
       margin: 0 auto;
-      padding: clamp(2.75rem, 6vw, 6.5rem) clamp(1.5rem, 6vw, 7rem);
-      display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.7fr);
+      display: flex;
       align-items: center;
-      gap: clamp(3rem, 9vw, 10rem);
-      flex: 1;
+      justify-content: space-between;
     }
 
-    .copy-column {
-      max-width: 38rem;
-      animation: rise-in 700ms ease-out both;
+    .logo {
+      width: 150px;
+      height: auto;
+      display: block;
     }
 
-    .hero-title {
-      margin: 0;
-      max-width: 12ch;
-      letter-spacing: -0.055em;
-      line-height: 0.96;
-    }
-
-    .volume-label {
-      margin: 1.15rem 0 0;
-      color: var(--ink);
+    .edition {
+      font-size: 13px;
       font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Hero */
+
+    main {
+      flex: 1;
+      width: 100%;
+    }
+
+    .hero {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: clamp(60px, 8vw, 120px) clamp(24px, 6vw, 96px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+      gap: clamp(60px, 9vw, 140px);
+      align-items: center;
+    }
+
+    .content {
+      max-width: 650px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: var(--blue);
     }
 
-    .supporting-copy {
-      max-width: 33rem;
-      margin: 2rem 0 0;
-      color: var(--muted);
-      font-size: clamp(1.05rem, 1.45vw, 1.22rem);
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      background: var(--pink);
+      border-radius: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(52px, 6vw, 88px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .title-accent {
+      position: relative;
+      display: inline-block;
+    }
+
+    .title-accent::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      bottom: -7px;
+      width: 72%;
+      height: 7px;
+      background: var(--pink);
+      border-radius: 20px;
+      z-index: -1;
+    }
+
+    .volume {
+      margin: 28px 0 0;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .description {
+      max-width: 560px;
+      margin: 28px 0 0;
+      font-size: clamp(18px, 2vw, 21px);
       line-height: 1.65;
+      color: var(--muted);
     }
 
-    .action-area {
-      margin-top: 2.6rem;
+    /* Benefits */
+
+    .benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .benefit {
+      padding: 9px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.45);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    /* CTA */
+
+    .action {
+      margin-top: 36px;
     }
 
     .download-button {
       display: inline-flex;
-      min-height: 3.75rem;
       align-items: center;
       justify-content: center;
-      padding: 0.85rem 1.75rem;
-      border: 1px solid transparent;
-      border-radius: 0.45rem;
-      box-shadow: 0 9px 18px rgba(0, 0, 153, 0.14);
-      cursor: pointer;
-      font: inherit;
+      gap: 12px;
+      min-height: 58px;
+      padding: 0 25px;
+      border-radius: 10px;
+      background: var(--blue);
+      color: var(--white);
       text-decoration: none;
-      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+      font-size: 16px;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(0, 0, 153, 0.18);
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
     }
 
     .download-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 13px 24px rgba(0, 0, 153, 0.18);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(0, 0, 153, 0.24);
     }
 
     .download-button:focus-visible {
-      outline: 3px solid var(--ink);
+      outline: 3px solid var(--pink);
       outline-offset: 4px;
     }
 
-    .free-note {
-      margin: 0.8rem 0 0;
+    .download-icon {
+      width: 19px;
+      height: 19px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .download-note {
+      margin: 12px 0 0;
+      font-size: 13px;
       color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.35;
     }
 
-    .cover-column {
+    /* Cover */
+
+    .cover-area {
       display: flex;
-      align-items: center;
       justify-content: center;
-      animation: rise-in 800ms 100ms ease-out both;
+      align-items: center;
     }
 
-    .cover-frame {
+    .cover-card {
       position: relative;
-      width: min(100%, 25.5rem);
+      width: min(100%, 430px);
+      padding: 18px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      box-shadow: 0 28px 70px rgba(0, 0, 80, 0.17);
+      transform: rotate(2deg);
     }
 
-    .cover-frame::before {
+    .cover-card::before {
       content: "";
       position: absolute;
-      z-index: -1;
-      top: 1rem;
-      right: -1rem;
+      top: 15px;
+      left: -15px;
       width: 100%;
       height: 100%;
-      border: 1px solid rgba(0, 0, 153, 0.2);
+      border: 1px solid rgba(0, 0, 153, 0.18);
+      z-index: -1;
     }
 
-    .ebook-cover {
+    .cover {
       display: block;
       width: 100%;
       height: auto;
-      object-fit: contain;
-      border-radius: 0.18rem;
-      box-shadow: 0 24px 48px rgba(0, 0, 80, 0.2);
     }
 
-    @keyframes rise-in {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .volume-tag {
+      position: absolute;
+      top: 34px;
+      right: 34px;
+      padding: 8px 11px;
+      background: var(--pink);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    @media (max-width: 840px) {
-      .hero-layout {
+    /* Info */
+
+    .info {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 6vw, 96px) 70px;
+    }
+
+    .info-card {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .info-item {
+      padding: 22px 0;
+    }
+
+    .info-item + .info-item {
+      border-left: 1px solid var(--rule);
+      padding-left: 30px;
+    }
+
+    .info-label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 26px clamp(24px, 6vw, 96px);
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .footer-copy {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero {
         grid-template-columns: 1fr;
-        gap: 3.75rem;
-        padding-top: 4.25rem;
-        padding-bottom: 4.75rem;
+        gap: 70px;
       }
 
-      .copy-column {
-        max-width: 42rem;
-      }
-
-      .cover-column {
+      .cover-area {
         order: -1;
       }
 
-      .cover-frame {
-        width: min(100%, 21rem);
+      .cover-card {
+        width: min(100%, 360px);
       }
     }
 
-    @media (max-width: 520px) {
-      .site-header {
-        padding-top: 1.35rem;
-        padding-bottom: 1.35rem;
+    @media (max-width: 600px) {
+      header {
+        padding: 22px 20px;
       }
 
-      .hero-layout {
-        gap: 2.85rem;
-        padding-top: 3rem;
+      .logo {
+        width: 125px;
       }
 
-      .cover-frame::before {
-        top: 0.65rem;
-        right: -0.65rem;
+      .edition {
+        display: none;
       }
 
-      .action-area {
-        margin-top: 2.2rem;
+      .hero {
+        padding: 55px 20px 70px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 15vw, 68px);
+      }
+
+      .description {
+        font-size: 17px;
       }
 
       .download-button {
         width: 100%;
       }
+
+      .info {
+        padding: 0 20px 50px;
+      }
+
+      .info-card {
+        grid-template-columns: 1fr;
+      }
+
+      .info-item + .info-item {
+        border-left: 0;
+        border-top: 1px solid var(--rule);
+        padding-left: 0;
+      }
+
+      footer {
+        padding: 22px 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .copy-column,
-      .cover-column {
-        animation: none;
+      html {
+        scroll-behavior: auto;
       }
 
       .download-button {
         transition: none;
       }
+
+      .cover-card {
+        transform: none;
+      }
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="/_sdk/efe904fe8a212716.data_sdk.js" type="text/javascript" integrity="sha512-oiO0pmn5llS1uDeB2l690YywxqOe/a0U1kzY6RGaLZXtyh9YjTk1CUoK/bJUugc1QbUaJMJ3IE1MtpNY5NBZCw=="></script>
-  <script src="/_sdk/6125e8aa3c264a2d.resizing_sdk.js" type="text/javascript" integrity="sha512-+j9iK2FF/yFSTU389rFqKj3v0s1ELh1r0aj3mqpsVRZujaeWi0WgN7jmTcWLcBq91dz3NCEyXqMtHbwpOxhDYg=="></script>
- </head>
- <body data-template-id="__page-root" class="w-full" style="background: rgb(247, 247, 244);">
-  <div class="landing-shell">
-   <header class="site-header" aria-label="MM CodeLab">
-    <img data-template-id="brand-logo" class="canva-image logo-image" loading="lazy" src="canva://MAHU-eKaf0g/1" alt="MM CodeLab logo">
-   </header>
-   <main class="hero-layout">
-    <section class="copy-column" aria-labelledby="hero-heading">
-     <h1 id="hero-heading" data-template-id="hero-title" class="canva-text hero-title" style="color: rgb(0, 0, 153); font-weight: 700; font-style: normal; font-size: 58px; letter-spacing: -0.055rem; line-height: 0.96;">C# No Complications</h1>
-     <p data-template-id="hero-volume" class="canva-text volume-label" style="color: rgb(0, 0, 153); font-weight: 600; font-style: normal; font-size: 16px; letter-spacing: 0.14rem; line-height: 1.3;">Volume 1</p>
-     <p data-template-id="hero-supporting-text" class="canva-text supporting-copy" style="color: rgb(57, 57, 121); font-weight: 400; font-style: normal; font-size: 19px; line-height: 1.65;">Learn C# programming step by step with a simple and practical approach.</p>
-     <div class="action-area">
-      <button data-template-id="download-button" class="canva-button download-button" type="button" aria-label="Download the eBook" id="ebook-download" style="background: rgb(255, 102, 204); color: rgb(0, 0, 153);"> <span data-template-id="download-button-text" class="canva-text" style="color: rgb(0, 0, 153); font-weight: 700; font-style: normal; font-size: 17px;">Download the eBook</span> </button>
-      <p data-template-id="free-download-note" class="canva-text free-note" style="color: rgb(57, 57, 121); font-weight: 500; font-style: normal; font-size: 14px;">Free download</p>
-     </div>
-    </section>
-    <section class="cover-column" aria-label="Ebook cover">
-     <div class="cover-frame">
-      <img data-template-id="ebook-cover" class="canva-image ebook-cover" loading="lazy" src="canva://MAHUsmq5W0Q/1" alt="C# Without Complications ebook cover">
-     </div>
-    </section>
-   </main>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <header>
+      <div class="header-inner">
+
+        <!-- Replace with your real logo file -->
+        <img
+          class="logo"
+          src="assets/mm-codelab-logo.png"
+          alt="MM CodeLab"
+        >
+
+        <span class="edition">Digital Edition</span>
+
+      </div>
+    </header>
+
+    <main>
+
+      <section class="hero">
+
+        <div class="content">
+
+          <div class="eyebrow">
+            MM CodeLab
+          </div>
+
+          <h1>
+            C# <span class="title-accent">Without</span><br>
+            Complications
+          </h1>
+
+          <p class="volume">
+            Volume 1
+          </p>
+
+          <p class="description">
+            Learn C# programming step by step with a simple,
+            practical and beginner-friendly approach.
+          </p>
+
+          <div class="benefits">
+            <span class="benefit">Beginner friendly</span>
+            <span class="benefit">Step by step</span>
+            <span class="benefit">Practical C#</span>
+          </div>
+
+          <div class="action">
+
+            <a
+              class="download-button"
+              href="downloads/csharp-without-complications.pdf"
+              download="CSharp-Without-Complications-Volume-1.pdf"
+              aria-label="Download C# Without Complications Volume 1"
+            >
+
+              <svg
+                class="download-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M12 3v12"></path>
+                <path d="m7 10 5 5 5-5"></path>
+                <path d="M5 21h14"></path>
+              </svg>
+
+              <span>Download the eBook</span>
+
+            </a>
+
+            <p class="download-note">
+              Free digital download · PDF
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="cover-area">
+
+          <div class="cover-card">
+
+            <!-- Replace with your real cover file -->
+            <img
+              class="cover"
+              src="assets/csharp-without-complications-cover.png"
+              alt="C# Without Complications Volume 1 ebook cover"
+            >
+
+            <span class="volume-tag">
+              Volume 01
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="info">
+
+        <div class="info-card">
+
+          <div class="info-item">
+            <span class="info-label">Format</span>
+            <span class="info-value">Digital PDF</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Level</span>
+            <span class="info-value">Beginner</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Language</span>
+            <span class="info-value">English</span>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer>
+
+      <div class="footer-inner">
+
+        <span class="footer-brand">
+          MM CodeLab
+        </span>
+
+        <p class="footer-copy">
+          C# No Complications · Volume 1
+        </p>
+
+      </div>
+
+    </footer>
+
   </div>
-  <script src="/_sdk/6f16dc4ffc0cf3fe.editing_sdk.js" integrity="sha512-XcGkt+MVg9QK/rlrq9umdkP9LzshVjIu+vaITjWOSFti+dqk5aHBHkCCQ/IXnnUyJtw0F+lYzvT7m4EfPrBrjg=="></script>
-  <script>
-    document.getElementById("ebook-download").addEventListener("click", function () {
-      window.open("canva://MAHUsmq5W0Q/1", "_blank");
-    });
-  </script>
- 
-</body></html>
+
+</body>
+</html>
