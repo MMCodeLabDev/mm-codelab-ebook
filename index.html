@@ -79,7 +79,7 @@
       color: var(--muted);
     }
 
-    /* Hero */
+    /* Hero — single column, centered, same on mobile and desktop */
 
     main {
       flex: 1;
@@ -87,24 +87,20 @@
     }
 
     .hero {
-      max-width: 1440px;
+      max-width: 620px;
       margin: 0 auto;
-      padding: clamp(60px, 8vw, 120px) clamp(24px, 6vw, 96px);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
-      gap: clamp(60px, 9vw, 140px);
+      padding: clamp(36px, 8vw, 90px) clamp(16px, 6vw, 40px);
+      display: flex;
+      flex-direction: column;
       align-items: center;
-    }
-
-    .content {
-      max-width: 650px;
+      text-align: center;
+      gap: clamp(18px, 4vw, 30px);
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      margin-bottom: 22px;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -123,9 +119,9 @@
     h1 {
       margin: 0;
       font-family: "Manrope", sans-serif;
-      font-size: clamp(52px, 6vw, 88px);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
+      font-size: clamp(38px, 11vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
       font-weight: 800;
       color: var(--blue);
     }
@@ -139,17 +135,52 @@
       content: "";
       position: absolute;
       left: 2px;
-      bottom: -7px;
+      bottom: -6px;
       width: 72%;
-      height: 7px;
+      height: 6px;
       background: var(--pink);
       border-radius: 20px;
       z-index: -1;
     }
 
+    /* Cover */
+
+    .cover-area {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .cover-card {
+      position: relative;
+      width: clamp(190px, 62vw, 320px);
+      padding: clamp(10px, 3vw, 16px);
+      background: var(--white);
+      border: 1px solid var(--rule);
+      box-shadow: 0 28px 70px rgba(0, 0, 80, 0.17);
+      transform: rotate(2deg);
+    }
+
+    .cover-card::before {
+      content: "";
+      position: absolute;
+      top: clamp(8px, 2vw, 12px);
+      left: clamp(-9px, -3vw, -12px);
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(0, 0, 153, 0.18);
+      z-index: -1;
+    }
+
+    .cover {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     .volume {
-      margin: 28px 0 0;
-      font-size: 16px;
+      margin: 0;
+      font-size: 15px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -157,10 +188,10 @@
     }
 
     .description {
-      max-width: 560px;
-      margin: 28px 0 0;
-      font-size: clamp(18px, 2vw, 21px);
-      line-height: 1.65;
+      max-width: 480px;
+      margin: 0;
+      font-size: clamp(15px, 4vw, 19px);
+      line-height: 1.6;
       color: var(--muted);
     }
 
@@ -169,8 +200,8 @@
     .benefits {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
-      margin-top: 30px;
     }
 
     .benefit {
@@ -186,7 +217,10 @@
     /* CTA */
 
     .action {
-      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     .download-button {
@@ -194,13 +228,15 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      min-height: 58px;
-      padding: 0 25px;
+      min-height: clamp(50px, 12vw, 58px);
+      width: 100%;
+      max-width: 360px;
+      padding: 0 clamp(18px, 5vw, 25px);
       border-radius: 10px;
       background: var(--blue);
       color: var(--white);
       text-decoration: none;
-      font-size: 16px;
+      font-size: clamp(15px, 3.5vw, 16px);
       font-weight: 700;
       box-shadow: 0 12px 30px rgba(0, 0, 153, 0.18);
       transition:
@@ -231,54 +267,6 @@
       margin: 12px 0 0;
       font-size: 13px;
       color: var(--muted);
-    }
-
-    /* Cover */
-
-    .cover-area {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .cover-card {
-      position: relative;
-      width: min(100%, 430px);
-      padding: 18px;
-      background: var(--white);
-      border: 1px solid var(--rule);
-      box-shadow: 0 28px 70px rgba(0, 0, 80, 0.17);
-      transform: rotate(2deg);
-    }
-
-    .cover-card::before {
-      content: "";
-      position: absolute;
-      top: 15px;
-      left: -15px;
-      width: 100%;
-      height: 100%;
-      border: 1px solid rgba(0, 0, 153, 0.18);
-      z-index: -1;
-    }
-
-    .cover {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .volume-tag {
-      position: absolute;
-      top: 34px;
-      right: 34px;
-      padding: 8px 11px;
-      background: var(--pink);
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
     }
 
     /* Info */
@@ -349,22 +337,7 @@
       color: var(--muted);
     }
 
-    /* Responsive */
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 70px;
-      }
-
-      .cover-area {
-        order: -1;
-      }
-
-      .cover-card {
-        width: min(100%, 360px);
-      }
-    }
+    /* Responsive tweaks (layout stays single-column at all sizes) */
 
     @media (max-width: 600px) {
       header {
@@ -377,22 +350,6 @@
 
       .edition {
         display: none;
-      }
-
-      .hero {
-        padding: 55px 20px 70px;
-      }
-
-      h1 {
-        font-size: clamp(48px, 15vw, 68px);
-      }
-
-      .description {
-        font-size: 17px;
-      }
-
-      .download-button {
-        width: 100%;
       }
 
       .info {
@@ -458,62 +415,14 @@
 
       <section class="hero">
 
-        <div class="content">
-
-          <div class="eyebrow">
-            MM CodeLab
-          </div>
-
-          <h1>
-            C# <span class="title-accent">No</span><br>
-            Complications
-          </h1>
-
-          <p class="volume">
-            Volume 1
-          </p>
-
-          <p class="description">
-            Learn C# programming step by step with a simple,
-            practical and beginner-friendly approach.
-          </p>
-
-          <div class="benefits">
-            <span class="benefit">Beginner friendly</span>
-            <span class="benefit">Step by step</span>
-            <span class="benefit">Practical C#</span>
-          </div>
-
-          <div class="action">
-
-            <a
-              class="download-button"
-              href="downloads/csharp-without-complications.pdf"
-              download="CSharp-Without-Complications-Volume-1.pdf"
-              aria-label="Download C# Without Complications Volume 1"
-            >
-
-              <svg
-                class="download-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M12 3v12"></path>
-                <path d="m7 10 5 5 5-5"></path>
-                <path d="M5 21h14"></path>
-              </svg>
-
-              <span>Download the eBook</span>
-
-            </a>
-
-            <p class="download-note">
-              Free digital download · PDF
-            </p>
-
-          </div>
-
+        <div class="eyebrow">
+          MM CodeLab
         </div>
+
+        <h1>
+          C# <span class="title-accent">No</span><br>
+          Complications
+        </h1>
 
         <div class="cover-area">
 
@@ -526,11 +435,51 @@
               alt="C# Without Complications Volume 1 ebook cover"
             >
 
-            <!-- <span class="volume-tag">
-              Volume 01
-            </span>-->
-
           </div>
+
+        </div>
+
+        <p class="volume">
+          Volume 1
+        </p>
+
+        <p class="description">
+          Learn C# programming step by step with a simple,
+          practical and beginner-friendly approach.
+        </p>
+
+        <div class="benefits">
+          <span class="benefit">Beginner friendly</span>
+          <span class="benefit">Step by step</span>
+          <span class="benefit">Practical C#</span>
+        </div>
+
+        <div class="action">
+
+          <a
+            class="download-button"
+            href="downloads/csharp-without-complications.pdf"
+            download="CSharp-Without-Complications-Volume-1.pdf"
+            aria-label="Download C# Without Complications Volume 1"
+          >
+
+            <svg
+              class="download-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M12 3v12"></path>
+              <path d="m7 10 5 5 5-5"></path>
+              <path d="M5 21h14"></path>
+            </svg>
+
+            <span>Download the eBook</span>
+
+          </a>
+
+          <p class="download-note">
+            Free digital download · PDF
+          </p>
 
         </div>
 
