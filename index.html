@@ -365,15 +365,41 @@
       gap: 20px;
     }
 
+    .footer-brand-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
     .footer-brand {
       font-size: 13px;
       font-weight: 700;
       color: var(--blue);
     }
 
+    .footer-tagline {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
     .footer-copy {
       margin: 0;
       font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    .footer-rights {
+      margin: 0;
+      font-size: 11px;
       color: var(--muted);
     }
 
@@ -485,6 +511,10 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
+      .footer-meta {
+        align-items: flex-start;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -518,6 +548,8 @@
         >
 
         <div class="header-right">
+
+          <span class="edition" data-en="Digital Edition" data-pt="Edição Digital">Digital Edition</span>
 
           <div class="lang-toggle" role="group" aria-label="Language switch">
             <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true">EN</button>
@@ -638,13 +670,21 @@
 
       <div class="footer-inner">
 
-        <span class="footer-brand">
-          MM CodeLab
-        </span>
+        <div class="footer-brand-group">
 
-        <p class="footer-copy" data-en="C# No Complications · Volume 1" data-pt="C# Sem Complicações · Volume 1">
-          C# No Complications · Volume 1
-        </p>
+          <p class="footer-tagline" data-en="Simple, practical coding guides." data-pt="Guias de programação simples e práticos.">
+            Simple, practical coding guides.
+          </p>
+
+        </div>
+
+        <div class="footer-meta">
+
+          <p class="footer-rights" data-en="© 2026 MM CodeLab. All rights reserved." data-pt="© 2026 MM CodeLab">
+            © 2026 MM CodeLab
+          </p>
+
+        </div>
 
       </div>
 
