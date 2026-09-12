@@ -79,7 +79,47 @@
       color: var(--muted);
     }
 
-    /* Hero — single column, centered, same on mobile and desktop */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .lang-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    .lang-btn.is-active {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 3px solid var(--pink);
+      outline-offset: 2px;
+    }
+
+    /* Hero — single column, centered on mobile; side-by-side on desktop */
 
     main {
       flex: 1;
@@ -477,7 +517,16 @@
           alt="MM CodeLab"
         >
 
-        <span class="edition">Digital Edition</span>
+        <div class="header-right">
+
+          <span class="edition" data-en="Digital Edition" data-pt="Edição Digital">Digital Edition</span>
+
+          <div class="lang-toggle" role="group" aria-label="Language switch">
+            <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" class="lang-btn" data-lang="pt" aria-pressed="false">PT</button>
+          </div>
+
+        </div>
 
       </div>
     </header>
@@ -486,24 +535,24 @@
 
       <section class="hero">
 
-        <div class="eyebrow">
-          MM CodeLab
-        </div>
-
-        <h1>
-          C# <span class="title-accent">No</span><br>
-          Complications
+        <h1 data-en-html="C# NO&lt;br&gt;COMPLICATIONS" data-pt-html="C# SEM&lt;br&gt;COMPLICAÇÕES">
+          C# NO<br>
+          COMPLICATIONS
         </h1>
 
         <div class="cover-area">
 
           <div class="cover-card">
 
-            <!-- Replace with your real cover file -->
+            <!-- Replace with your real cover files -->
             <img
               class="cover"
               src="assets/csharp-without-complications-cover.png"
               alt="C# Without Complications Volume 1 ebook cover"
+              data-src-en="assets/csharp-without-complications-cover.png"
+              data-src-pt="assets/csharp-sem-complicacoes-capa-pt.png"
+              data-alt-en="C# Without Complications Volume 1 ebook cover"
+              data-alt-pt="Capa do ebook C# Sem Complicações Volume 1"
             >
 
           </div>
@@ -514,15 +563,15 @@
           Volume 1
         </p>
 
-        <p class="description">
+        <p class="description" data-en="Learn C# programming step by step with a simple, practical and beginner-friendly approach." data-pt="Aprende programação em C# passo a passo, de forma simples, prática e acessível para iniciantes.">
           Learn C# programming step by step with a simple,
           practical and beginner-friendly approach.
         </p>
 
         <div class="benefits">
-          <span class="benefit">Beginner friendly</span>
-          <span class="benefit">Step by step</span>
-          <span class="benefit">Practical C#</span>
+          <span class="benefit" data-en="Beginner friendly" data-pt="Para iniciantes">Beginner friendly</span>
+          <span class="benefit" data-en="Step by step" data-pt="Passo a passo">Step by step</span>
+          <span class="benefit" data-en="Practical C#" data-pt="C# prático">Practical C#</span>
         </div>
 
         <div class="action">
@@ -532,6 +581,12 @@
             href="downloads/csharp-without-complications.pdf"
             download="CSharp-Without-Complications-Volume-1.pdf"
             aria-label="Download C# Without Complications Volume 1"
+            data-href-en="downloads/csharp-without-complications.pdf"
+            data-href-pt="downloads/csharp-sem-complicacoes.pdf"
+            data-download-en="CSharp-Without-Complications-Volume-1.pdf"
+            data-download-pt="CSharp-Sem-Complicacoes-Volume-1.pdf"
+            data-aria-en="Download C# Without Complications Volume 1"
+            data-aria-pt="Descarregar C# Sem Complicações Volume 1"
           >
 
             <svg
@@ -544,11 +599,11 @@
               <path d="M5 21h14"></path>
             </svg>
 
-            <span>Download the eBook</span>
+            <span data-en="Download the eBook" data-pt="Descarregar o eBook">Download the eBook</span>
 
           </a>
 
-          <p class="download-note">
+          <p class="download-note" data-en="Free digital download · PDF" data-pt="Download digital gratuito · PDF">
             Free digital download · PDF
           </p>
 
@@ -561,18 +616,18 @@
         <div class="info-card">
 
           <div class="info-item">
-            <span class="info-label">Format</span>
+            <span class="info-label" data-en="Format" data-pt="Formato">Format</span>
             <span class="info-value">Digital PDF</span>
           </div>
 
           <div class="info-item">
-            <span class="info-label">Level</span>
-            <span class="info-value">Beginner</span>
+            <span class="info-label" data-en="Level" data-pt="Nível">Level</span>
+            <span class="info-value" data-en="Beginner" data-pt="Iniciante">Beginner</span>
           </div>
 
           <div class="info-item">
-            <span class="info-label">Language</span>
-            <span class="info-value">English</span>
+            <span class="info-label" data-en="Language" data-pt="Idioma">Language</span>
+            <span class="info-value" data-en="English" data-pt="Português">English</span>
           </div>
 
         </div>
@@ -589,7 +644,7 @@
           MM CodeLab
         </span>
 
-        <p class="footer-copy">
+        <p class="footer-copy" data-en="C# No Complications · Volume 1" data-pt="C# Sem Complicações · Volume 1">
           C# No Complications · Volume 1
         </p>
 
@@ -598,6 +653,77 @@
     </footer>
 
   </div>
+
+  <script>
+    (function () {
+      var buttons = document.querySelectorAll('.lang-btn');
+
+      function setLanguage(lang) {
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll('[data-en]').forEach(function (el) {
+          var text = lang === 'pt' ? el.getAttribute('data-pt') : el.getAttribute('data-en');
+          if (text !== null) {
+            el.textContent = text;
+          }
+        });
+
+        document.querySelectorAll('[data-en-html]').forEach(function (el) {
+          var html = lang === 'pt' ? el.getAttribute('data-pt-html') : el.getAttribute('data-en-html');
+          if (html !== null) {
+            el.innerHTML = html;
+          }
+        });
+
+        document.querySelectorAll('[data-alt-en]').forEach(function (el) {
+          var alt = lang === 'pt' ? el.getAttribute('data-alt-pt') : el.getAttribute('data-alt-en');
+          if (alt !== null) {
+            el.setAttribute('alt', alt);
+          }
+        });
+
+        document.querySelectorAll('[data-src-en]').forEach(function (el) {
+          var src = lang === 'pt' ? el.getAttribute('data-src-pt') : el.getAttribute('data-src-en');
+          if (src !== null) {
+            el.setAttribute('src', src);
+          }
+        });
+
+        document.querySelectorAll('[data-href-en]').forEach(function (el) {
+          var href = lang === 'pt' ? el.getAttribute('data-href-pt') : el.getAttribute('data-href-en');
+          if (href !== null) {
+            el.setAttribute('href', href);
+          }
+        });
+
+        document.querySelectorAll('[data-download-en]').forEach(function (el) {
+          var name = lang === 'pt' ? el.getAttribute('data-download-pt') : el.getAttribute('data-download-en');
+          if (name !== null) {
+            el.setAttribute('download', name);
+          }
+        });
+
+        document.querySelectorAll('[data-aria-en]').forEach(function (el) {
+          var label = lang === 'pt' ? el.getAttribute('data-aria-pt') : el.getAttribute('data-aria-en');
+          if (label !== null) {
+            el.setAttribute('aria-label', label);
+          }
+        });
+
+        buttons.forEach(function (btn) {
+          var active = btn.getAttribute('data-lang') === lang;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setLanguage(btn.getAttribute('data-lang'));
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
