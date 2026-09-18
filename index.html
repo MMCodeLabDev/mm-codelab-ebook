@@ -11,6 +11,13 @@
     content="Learn C# programming step by step with a simple and practical approach."
   >
 
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="C# No Complications | Free Chapter 1">
+  <meta property="og:description" content="Learn C# step by step. Download chapter 1 free, then go all the way to your first console app.">
+  <meta property="og:image" content="https://mmcodelabdev.github.io/mm-codelab-ebook/assets/csharp-without-complications-cover.png">
+  <meta property="og:url" content="https://mmcodelabdev.github.io/mm-codelab-ebook/">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -309,6 +316,22 @@
       color: var(--muted);
     }
 
+    /* Buy button (secondary) */
+
+    .download-button.buy-button {
+      margin-top: 22px;
+      background: var(--white);
+      color: var(--blue);
+      border: 2px solid var(--blue);
+      box-shadow: none;
+      text-align: center;
+    }
+
+    .download-button.buy-button:hover {
+      background: var(--blue);
+      color: var(--white);
+    }
+
     /* Info */
 
     .info {
@@ -347,6 +370,68 @@
       font-size: 15px;
       font-weight: 700;
       color: var(--blue);
+    }
+
+    /* Chapters */
+
+    .chapters {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 6vw, 96px) 70px;
+    }
+
+    .chapters-title {
+      margin: 0 0 24px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--blue);
+    }
+
+    .chapter-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 40px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .chapter-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    .chapter-number {
+      flex: 0 0 auto;
+      min-width: 28px;
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--pink);
+    }
+
+    .chapter-item.is-project {
+      grid-column: 1 / -1;
+      padding: 18px 16px;
+      margin: 16px 0;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (max-width: 700px) {
+      .chapter-list {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* Footer */
@@ -531,6 +616,7 @@
       }
     }
   </style>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="03a24cce-e44e-4089-a3c9-db13c07ae08e"></script>
 </head>
 
 <body>
@@ -609,14 +695,15 @@
           <a
             class="download-button"
             href="downloads/csharp-without-complications.pdf"
-            download="CSharp-Without-Complications-Volume-1.pdf"
-            aria-label="Download C# Without Complications Volume 1"
+            download="CSharp-Without-Complications-Chapter-1.pdf"
+            aria-label="Download C# Without Complications Chapter 1 (free)"
+            data-umami-event="download-chapter-1"
             data-href-en="downloads/csharp-without-complications.pdf"
             data-href-pt="downloads/csharp-sem-complicacoes.pdf"
-            data-download-en="CSharp-Without-Complications-Volume-1.pdf"
-            data-download-pt="CSharp-Sem-Complicacoes-Volume-1.pdf"
-            data-aria-en="Download C# Without Complications Volume 1"
-            data-aria-pt="Descarregar C# Sem Complicações Volume 1"
+            data-download-en="CSharp-Without-Complications-Chapter-1.pdf"
+            data-download-pt="CSharp-Sem-Complicacoes-Capitulo-1.pdf"
+            data-aria-en="Download C# Without Complications Chapter 1 (free)"
+            data-aria-pt="Descarregar o capítulo 1 de C# Sem Complicações (grátis)"
           >
 
             <svg
@@ -629,15 +716,56 @@
               <path d="M5 21h14"></path>
             </svg>
 
-            <span data-en="Download the eBook" data-pt="Descarregar o eBook">Download the eBook</span>
+            <span data-en="Download Chapter 1 (free)" data-pt="Descarregar o capítulo 1 (grátis)">Download Chapter 1 (free)</span>
 
           </a>
 
-          <p class="download-note" data-en="Free digital download · PDF" data-pt="Download digital gratuito · PDF">
-            Free digital download · PDF
+          <p class="download-note" data-en="Free sample · PDF" data-pt="Amostra gratuita · PDF">
+            Free sample · PDF
+          </p>
+
+        
+
+           <a
+            class="download-button buy-button"
+            href="https://payhip.com/b/VxNKc"
+            data-href-en="https://payhip.com/b/VxNKc"
+            data-href-pt="https://payhip.com/b/qtZ4T"
+            data-umami-event="click-buy-ebook"
+            target="_blank"
+            rel="noopener"
+          >
+            <span data-en="Get the full ebook: 11 chapters + mini-project" data-pt="Obter o ebook completo: 11 capítulos + mini-projeto">Get the full ebook: 11 chapters + mini-project</span>
+          </a>
+
+          <p class="download-note" data-en="Full ebook · €12.99" data-pt="Ebook completo · 12,99 €">
+            Full ebook · €12.99
           </p>
 
         </div>
+
+      </section>
+
+      <section class="chapters">
+
+        <h2 class="chapters-title" data-en="What's inside" data-pt="O que vais encontrar">What's inside</h2>
+
+        <ol class="chapter-list">
+          <li class="chapter-item"><span class="chapter-number">01</span><span data-en="Required tools" data-pt="Ferramentas necessárias">Required tools</span></li>
+          <li class="chapter-item"><span class="chapter-number">02</span><span data-en="The structure of a program in C#" data-pt="Estrutura de um programa em C#">The structure of a program in C#</span></li>
+          <li class="chapter-item"><span class="chapter-number">03</span><span data-en="Variables and data types" data-pt="Variáveis e tipos de dados">Variables and data types</span></li>
+          <li class="chapter-item"><span class="chapter-number">04</span><span data-en="Data input and output" data-pt="Entrada e saída de dados">Data input and output</span></li>
+          <li class="chapter-item"><span class="chapter-number">05</span><span data-en="Operators and expressions" data-pt="Operadores e expressões">Operators and expressions</span></li>
+          <li class="chapter-item"><span class="chapter-number">06</span><span data-en="Conditional statements (if, else, switch)" data-pt="Condições (if, else, switch)">Conditional statements (if, else, switch)</span></li>
+          <li class="chapter-item"><span class="chapter-number">07</span><span data-en="Looping structures (for, while, foreach)" data-pt="Ciclos de repetição (for, while, foreach)">Looping structures (for, while, foreach)</span></li>
+          <li class="chapter-item"><span class="chapter-number">08</span><span data-en="Arrays and lists" data-pt="Array e List">Arrays and lists</span></li>
+          <li class="chapter-item"><span class="chapter-number">09</span><span data-en="Methods" data-pt="Métodos">Methods</span></li>
+          <li class="chapter-item"><span class="chapter-number">10</span><span data-en="Classes and objects" data-pt="Classes e objetos">Classes and objects</span></li>
+          <li class="chapter-item"><span class="chapter-number">11</span><span data-en="Common errors" data-pt="Erros comuns">Common errors</span></li>
+          <li class="chapter-item is-project"><span class="chapter-number">+</span><span data-en="Practical mini-project" data-pt="Mini projeto prático">Practical mini-project</span></li>
+          <li class="chapter-item"><span class="chapter-number">✓</span><span data-en="Solutions" data-pt="Soluções">Solutions</span></li>
+          <li class="chapter-item"><span class="chapter-number">→</span><span data-en="Next steps" data-pt="Próximos passos">Next steps</span></li>
+        </ol>
 
       </section>
 
