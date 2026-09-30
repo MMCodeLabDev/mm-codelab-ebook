@@ -19,6 +19,10 @@ type Props = {
   seed?: string;
   font?: string;
   weight?: number;
+  /** Entry length in frames (default 14 — a slam; use ~40 for a slow film title). */
+  enterFrames?: number;
+  /** Starting scale of the entry (default 1.25). */
+  scaleFrom?: number;
 };
 
 /**
@@ -38,13 +42,15 @@ export const Headline: React.FC<Props> = ({
   seed,
   font = FONTS.display,
   weight = 700,
+  enterFrames = 14,
+  scaleFrom = 1.25,
 }) => {
   const frame = useCurrentFrame();
   if (frame < at) return null;
 
-  const t = lerpFrames(frame, [at, at + 14], [0, 1], EASE.outExpo);
+  const t = lerpFrames(frame, [at, at + enterFrames], [0, 1], EASE.outExpo);
   const exit = out === undefined ? 0 : lerpFrames(frame, [out - 8, out], [0, 1], EASE.inExpo);
-  const glitchAmt = glitch * (lerpFrames(frame, [at, at + 16], [1, 0.08]) + exit);
+  const glitchAmt = glitch * (lerpFrames(frame, [at, at + enterFrames + 2], [1, 0.08]) + exit);
 
   return (
     <div
@@ -56,7 +62,7 @@ export const Headline: React.FC<Props> = ({
         display: "flex",
         justifyContent: "center",
         opacity: t * (1 - exit),
-        transform: `scale(${1.25 - 0.25 * t + exit * 0.1})`,
+        transform: `scale(${scaleFrom - (scaleFrom - 1) * t + exit * 0.1})`,
         filter: `blur(${(1 - t) * 14 + exit * 10}px)`,
       }}
     >

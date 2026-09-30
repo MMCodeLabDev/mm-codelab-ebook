@@ -16,10 +16,23 @@ const speedAt = (f: number) => {
 };
 
 /** Deterministic travel distance: sum of speeds up to this frame. */
-const travelAt = (frame: number) => {
+const travelAt = (frame: number, speed: (f: number) => number) => {
   let d = 0;
-  for (let f = 0; f < frame; f++) d += speedAt(f);
+  for (let f = 0; f < frame; f++) d += speed(f);
   return d;
+};
+
+export type GridLook = {
+  speed: (frame: number) => number;
+  visible: (frame: number) => number;
+  color: (frame: number) => string;
+};
+
+const LAST_LINE_LOOK: GridLook = {
+  speed: speedAt,
+  visible: (frame) =>
+    lerpFrames(frame, [8, 30], [0, 1]) * lerpFrames(frame, [SCENES.reveal.from - 4, SCENES.reveal.from + 16], [1, 0.12]),
+  color: (frame) => accentAt(frame, 0.55),
 };
 
 const Plane: React.FC<{ color: string; offset: number; ceiling?: boolean; opacity: number }> = ({
@@ -48,12 +61,11 @@ const Plane: React.FC<{ color: string; offset: number; ceiling?: boolean; opacit
 );
 
 /** Perspective floor + ceiling grid: gives depth and a sense of motion through the system. */
-export const GridTunnel: React.FC = () => {
+export const GridTunnel: React.FC<{ look?: GridLook }> = ({ look = LAST_LINE_LOOK }) => {
   const frame = useCurrentFrame();
-  const offset = travelAt(frame) % CELL;
-  const visible =
-    lerpFrames(frame, [8, 30], [0, 1]) * lerpFrames(frame, [SCENES.reveal.from - 4, SCENES.reveal.from + 16], [1, 0.12]);
-  const color = accentAt(frame, 0.55);
+  const offset = travelAt(frame, look.speed) % CELL;
+  const visible = look.visible(frame);
+  const color = look.color(frame);
 
   return (
     <AbsoluteFill style={{ perspective: 900, perspectiveOrigin: "50% 48%", overflow: "hidden" }}>

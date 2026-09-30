@@ -26,19 +26,37 @@ const Corner: React.FC<{ x: number; y: number; flipX?: boolean; flipY?: boolean;
   />
 );
 
-/** Decorative sci-fi interface frame: corner brackets, status lines, scanning bar. */
-export const HudOverlay: React.FC = () => {
-  const frame = useCurrentFrame();
-  const on = BEATS.failure.interfaceOn;
-  if (frame < on) return null;
+export type HudLook = {
+  opacity: (frame: number) => number;
+  color: (frame: number) => string;
+  title: string;
+  status: (frame: number) => { text: string; alert: boolean };
+};
 
-  const boot = lerpFrames(frame, [on, on + 10], [0, 1]);
-  const hide = lerpFrames(frame, [SCENES.reveal.from - 4, SCENES.reveal.from + 12], [1, 0]);
-  const opacity = boot * hide;
+const LAST_LINE_LOOK: HudLook = {
+  opacity: (frame) => {
+    const on = BEATS.failure.interfaceOn;
+    if (frame < on) return 0;
+    const boot = lerpFrames(frame, [on, on + 10], [0, 1]);
+    const hide = lerpFrames(frame, [SCENES.reveal.from - 4, SCENES.reveal.from + 12], [1, 0]);
+    return boot * hide;
+  },
+  color: (frame) => accentAt(frame, 0.9),
+  title: "MM//CORE-OS  v4.2",
+  status: (frame) => {
+    const restored = restoreAmount(frame) > 0.5;
+    return { text: restored ? "STATE: STABLE" : "STATE: CRITICAL", alert: !restored };
+  },
+};
+
+/** Decorative sci-fi interface frame: corner brackets, status lines, scanning bar. */
+export const HudOverlay: React.FC<{ look?: HudLook }> = ({ look = LAST_LINE_LOOK }) => {
+  const frame = useCurrentFrame();
+  const opacity = look.opacity(frame);
   if (opacity <= 0) return null;
 
-  const color = accentAt(frame, 0.9);
-  const restored = restoreAmount(frame) > 0.5;
+  const color = look.color(frame);
+  const status = look.status(frame);
   const scanY = 200 + ((frame * 9) % 1520);
   const label: React.CSSProperties = {
     position: "absolute",
@@ -58,10 +76,10 @@ export const HudOverlay: React.FC = () => {
       <Corner x={40} y={1706} flipY color={color} />
       <Corner x={976} y={1706} flipX flipY color={color} />
 
-      <div style={{ ...label, left: 60, top: 110 }}>MM//CORE-OS  v4.2</div>
+      <div style={{ ...label, left: 60, top: 110 }}>{look.title}</div>
       <div style={{ ...label, right: 60, top: 110, textAlign: "right" }}>
-        {restored ? "STATE: STABLE" : "STATE: CRITICAL"}
-        {!restored && <Icon name="dot" size={16} color={color} style={{ marginLeft: 10, opacity: blink ? 1 : 0 }} />}
+        {status.text}
+        {status.alert && <Icon name="dot" size={16} color={color} style={{ marginLeft: 10, opacity: blink ? 1 : 0 }} />}
       </div>
       <div style={{ ...label, left: 60, bottom: 150, fontSize: 18, opacity: 0.55 }}>
         {`NODE 0x${(0x3fa0 + frame * 7).toString(16).toUpperCase()}  ·  SEC ${String(frame % 1000).padStart(3, "0")}`}

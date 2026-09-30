@@ -27,18 +27,25 @@ const Beacon: React.FC<{ x: number; y: number; angle: number; intensity: number 
 );
 
 /** Rotating emergency beacons + pulsing red edge light. Fade away when the system is restored. */
-export const EmergencyLights: React.FC = () => {
-  const frame = useCurrentFrame();
+/** "The Last Line of Code": flicker on at lights-on, fade out as the system is restored. */
+const lastLineIntensity = (frame: number) => {
   const start = BEATS.failure.lightsOn;
-  if (frame < start) return null;
-
+  if (frame < start) return 0;
   const alarm = 1 - restoreAmount(frame);
-  if (alarm <= 0.001) return null;
-
+  if (alarm <= 0.001) return 0;
   const flickerOn = [1, 0, 1, 0, 1, 1][frame - start] ?? 1;
-  const intensity = alarm * flickerOn * lerpFrames(frame, [start, start + 2], [0, 1]);
+  return alarm * flickerOn * lerpFrames(frame, [start, start + 2], [0, 1]);
+};
+
+export const EmergencyLights: React.FC<{ intensityAt?: (frame: number) => number; speed?: number }> = ({
+  intensityAt = lastLineIntensity,
+  speed = 5.2,
+}) => {
+  const frame = useCurrentFrame();
+  const intensity = intensityAt(frame);
+  if (intensity <= 0) return null;
   const edgePulse = 0.45 + 0.55 * Math.pow(Math.max(0, Math.sin(frame * 0.21)), 2);
-  const rot = frame * 5.2;
+  const rot = frame * speed;
 
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>

@@ -13,14 +13,16 @@ type Props = {
   fontSize: number;
   /** Colour override for every token (e.g. corrupted panels). */
   tint?: string;
+  /** Extra identifiers to colour as types. */
+  extraTypes?: ReadonlySet<string>;
 };
 
 const colorFor = (kind: CharKind) => (kind === "space" || kind === "insert" ? SYNTAX.ident : SYNTAX[kind]);
 
 /** Renders a single syntax-highlighted C# line in a monospace grid (1 char = 1ch). */
-export const CodeLine: React.FC<Props> = ({ line, insert, mark, fontSize, tint }) => {
+export const CodeLine: React.FC<Props> = ({ line, insert, mark, fontSize, tint, extraTypes }) => {
   const chars: { ch: string; kind: CharKind }[] = [];
-  for (const token of tokenize(line)) for (const ch of token.text) chars.push({ ch, kind: token.kind });
+  for (const token of tokenize(line, extraTypes)) for (const ch of token.text) chars.push({ ch, kind: token.kind });
   if (insert && insert.text.length > 0) {
     chars.splice(insert.col, 0, ...[...insert.text].map((ch) => ({ ch, kind: "insert" as const })));
   }

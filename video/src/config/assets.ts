@@ -7,14 +7,17 @@ import { staticFile } from "remotion";
  *
  *  public/brand/mm-codelab-logo.png  → MM CodeLab logo (transparent PNG, wide)
  *  public/brand/ebook-cover.png      → "C# No Complications" cover (portrait, ~0.64 ratio)
- *  public/audio/soundtrack.wav       → Soundtrack (25 s). Generated procedurally by
- *                                       scripts/generate-soundtrack.mjs (royalty-free,
- *                                       original). Replace with licensed music if desired.
+ *  public/audio/soundtrack.wav       → "The Last Line of Code" soundtrack (25 s). Generated
+ *                                       procedurally by scripts/generate-soundtrack.mjs
+ *                                       (royalty-free, original).
+ *  public/audio/do-not-touch-the-code.wav → "DO NOT TOUCH THE CODE" soundtrack (25 s),
+ *                                       scripts/generate-soundtrack-do-not-touch.mjs.
  */
 export const ASSETS = {
   logo: staticFile("brand/mm-codelab-logo.png"),
   cover: staticFile("brand/ebook-cover.png"),
   soundtrack: staticFile("audio/soundtrack.wav"),
+  soundtrackDoNotTouch: staticFile("audio/do-not-touch-the-code.wav"),
 } as const;
 
 /** Native pixel sizes — used to keep aspect ratios exact. Update if you swap files. */

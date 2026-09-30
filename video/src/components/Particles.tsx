@@ -14,7 +14,21 @@ const COUNT = 90;
  * Depth-of-field dust / data motes. Fully deterministic (seeded `random`).
  * At the system-restore wave, every mote is blasted outward from the centre.
  */
-export const Particles: React.FC<{ burstCenterY?: number }> = ({ burstCenterY = 860 }) => {
+export type ParticlesLook = {
+  /** 0..1 outward blast progress. */
+  burst: (frame: number) => number;
+  visible: (frame: number) => number;
+  /** 0 = red embers … 1 = blue data motes. */
+  blueness: (frame: number) => number;
+};
+
+const LAST_LINE_LOOK: ParticlesLook = {
+  burst: (frame) => lerpFrames(frame, [SCENES.wave.from, SCENES.wave.from + 75], [0, 1], EASE.outExpo),
+  visible: (frame) => lerpFrames(frame, [6, 24], [0, 1]) * lerpFrames(frame, [SCENES.reveal.from, SCENES.reveal.from + 20], [1, 0.45]),
+  blueness: restoreAmount,
+};
+
+export const Particles: React.FC<{ burstCenterY?: number; look?: ParticlesLook }> = ({ burstCenterY = 860, look = LAST_LINE_LOOK }) => {
   const frame = useCurrentFrame();
 
   const particles = useMemo<Particle[]>(
@@ -32,9 +46,9 @@ export const Particles: React.FC<{ burstCenterY?: number }> = ({ burstCenterY = 
     [],
   );
 
-  const burst = lerpFrames(frame, [SCENES.wave.from, SCENES.wave.from + 75], [0, 1], EASE.outExpo);
-  const visible = lerpFrames(frame, [6, 24], [0, 1]) * lerpFrames(frame, [SCENES.reveal.from, SCENES.reveal.from + 20], [1, 0.45]);
-  const t = restoreAmount(frame);
+  const burst = look.burst(frame);
+  const visible = look.visible(frame);
+  const t = look.blueness(frame);
 
   return (
     <AbsoluteFill style={{ opacity: visible, pointerEvents: "none" }}>

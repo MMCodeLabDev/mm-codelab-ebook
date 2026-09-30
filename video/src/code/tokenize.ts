@@ -24,8 +24,8 @@ const TYPES = new Set([
 const PATTERN =
   /(\/\/.*$)|(\$?"(?:[^"\\]|\\.)*")|(\d+(?:\.\d+)?[mMfFdD]?)|([A-Za-z_]\w*)|(\s+)|([^\sA-Za-z_\d])/g;
 
-/** Minimal C# tokenizer — enough for cinematic syntax highlighting. */
-export const tokenize = (line: string): Token[] => {
+/** Minimal C# tokenizer — enough for cinematic syntax highlighting. `extraTypes` adds project-specific type names. */
+export const tokenize = (line: string, extraTypes?: ReadonlySet<string>): Token[] => {
   const tokens: Token[] = [];
   for (const m of line.matchAll(PATTERN)) {
     const [text, comment, str, num, word, space] = m;
@@ -36,7 +36,7 @@ export const tokenize = (line: string): Token[] => {
     else if (word) {
       const rest = line.slice((m.index ?? 0) + text.length);
       if (KEYWORDS.has(word)) tokens.push({ text, kind: "keyword" });
-      else if (TYPES.has(word)) tokens.push({ text, kind: "type" });
+      else if (TYPES.has(word) || extraTypes?.has(word)) tokens.push({ text, kind: "type" });
       else if (rest.startsWith("(")) tokens.push({ text, kind: "method" });
       else tokens.push({ text, kind: "ident" });
     } else tokens.push({ text, kind: "punct" });

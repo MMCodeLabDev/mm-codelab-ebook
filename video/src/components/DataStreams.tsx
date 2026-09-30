@@ -7,8 +7,16 @@ import { VIDEO } from "../config/video";
 
 const COUNT = 26;
 
+export type StreamsLook = { visible: (frame: number) => number; color: (frame: number) => string };
+
+const LAST_LINE_LOOK: StreamsLook = {
+  visible: (frame) =>
+    lerpFrames(frame, [10, 40], [0, 1]) * lerpFrames(frame, [SCENES.reveal.from - 4, SCENES.reveal.from + 12], [1, 0]),
+  color: (frame) => accentAt(frame, 1),
+};
+
 /** Thin vertical light streaks falling through the background — energy running through the system. */
-export const DataStreams: React.FC = () => {
+export const DataStreams: React.FC<{ look?: StreamsLook }> = ({ look = LAST_LINE_LOOK }) => {
   const frame = useCurrentFrame();
   const streams = useMemo(
     () =>
@@ -21,10 +29,9 @@ export const DataStreams: React.FC = () => {
       })),
     [],
   );
-  const visible =
-    lerpFrames(frame, [10, 40], [0, 1]) * lerpFrames(frame, [SCENES.reveal.from - 4, SCENES.reveal.from + 12], [1, 0]);
+  const visible = look.visible(frame);
   if (visible <= 0) return null;
-  const color = accentAt(frame, 1);
+  const color = look.color(frame);
 
   return (
     <AbsoluteFill style={{ opacity: visible, pointerEvents: "none" }}>
