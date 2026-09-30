@@ -1,0 +1,26 @@
+{
+  "name": "mm-codelab-last-line-of-code",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MM CodeLab cinematic vertical promos for C# No Complications (Remotion): \"The Last Line of Code\" and \"DO NOT TOUCH THE CODE\".",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render LastLineOfCode out/last-line-of-code.mp4",
+    "render:dntc": "remotion render DoNotTouchTheCode out/do-not-touch-the-code.mp4",
+    "render:still": "remotion still LastLineOfCode out/thumbnail.png --frame=749",
+    "render:still:dntc": "remotion still DoNotTouchTheCode out/do-not-touch-the-code-thumbnail.png --frame=749",
+    "soundtrack": "node scripts/generate-soundtrack.mjs",
+    "soundtrack:dntc": "node scripts/generate-soundtrack-do-not-touch.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.530",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.530"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
